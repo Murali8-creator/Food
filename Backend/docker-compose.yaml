@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - food-order-network
+
+  backend:
+    image: food-order-backend-new
+    container_name: backend
+    depends_on:
+      - mongodb
+    ports:
+      - "8080:8080"
+    networks:
+      - food-order-network
+    environment:
+      - SPRING_DATA_MONGODB_URI=mongodb://mongodb:27017/your_database_name
+
+networks:
+  food-order-network:
+    driver: bridge
+
+volumes:
+  mongo-data:
