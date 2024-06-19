@@ -21,11 +21,10 @@ services:
     networks:
       - food-order-network
     environment:
-      - SPRING_DATA_MONGODB_URI=mongodb://mongodb:27017/your_database_name
+      - SPRING_DATA_MONGODB_URI=mongodb://mongodb:27017/food
 
 networks:
   food-order-network:
-    driver: bridge
 
 volumes:
   mongo-data:
